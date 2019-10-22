@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.view.View;
 import android.widget.Button;
 
@@ -23,7 +24,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onClick(View view) {
-        Intent callTO = new Intent(Intent.ACTION_VIEW, Uri.parse("tel:800"));
+        Intent callTO = new Intent(ContactsContract.Intents.Insert.ACTION);
+
+        callTO.setType(ContactsContract.RawContacts.CONTENT_TYPE);
+        callTO.putExtra(ContactsContract.Intents.Insert.NAME, "客服專線");
+        callTO.putExtra(ContactsContract.Intents.Insert.PHONE, "800");
+
         startActivity(callTO);
     }
 }
